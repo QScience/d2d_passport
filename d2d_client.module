@@ -1,0 +1,35 @@
+<?php
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_d2d_secure_rpc().
+ */
+function d2d_client_d2d_secure_rpc() {
+
+  $methods = array();
+  $methods['d2d_client_get_users_number'] = array(
+    'arguments' => array(),
+    'callback' => '_d2d_client_get_users_number',
+    'description' => 'Returns users_number of this website.',
+  );
+  return $methods;
+}
+
+/**
+ */
+function _d2d_client_get_users_number($arguments, $rpc_info) {
+  $error_string = NULL;
+  $users_number = NULL;
+
+  $query = db_select('users', 'u')
+    ->fields('u', array('uid'))
+    ->condition('status', 1, '=')
+    ->execute();
+
+  $users_number = $query->rowCount();
+
+  return d2d_implode(array('return' => $users_number, 'error' => $error_string));
+
+}

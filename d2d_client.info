@@ -1,0 +1,7 @@
+name = D2D Client
+description = "With this Client, D2D Server can get all the information it want."
+package = U_D
+core = 7.x
+php = 5.3
+
+dependencies[] = d2d
