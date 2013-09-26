@@ -19,6 +19,11 @@ function d2d_client_d2d_secure_rpc() {
     'callback' => '_d2d_client_get_site_information',
     'description' => 'Returns site title and slogon of this website.',
   );
+  $methods['d2d_client_get_nodes_number'] = array(
+    'arguments' => array(),
+    'callback' => '_d2d_client_get_nodes_number',
+    'description' => 'Returns nodes number of this website.',
+  );
   return $methods;
 }
 
@@ -50,4 +55,21 @@ function _d2d_client_get_site_information($arguments, $rpc_info) {
 
   $return = d2d_implode($return);
   return d2d_implode(array('return' => $return, 'error' => $error_string));
+}
+
+/**
+ */
+function _d2d_client_get_nodes_number($arguments, $rpc_info) {
+  $error_string = NULL;
+  $nodes_number = NULL;
+
+  $query = db_select('node', 'n')
+    ->fields('n', array('nid'))
+    ->condition('status', 1, '=')
+    ->execute();
+
+  $nodes_number = $query->rowCount();
+
+  return d2d_implode(array('return' => $nodes_number, 'error' => $error_string));
+
 }
