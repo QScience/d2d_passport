@@ -14,6 +14,11 @@ function d2d_client_d2d_secure_rpc() {
     'callback' => '_d2d_client_get_users_number',
     'description' => 'Returns users_number of this website.',
   );
+  $methods['d2d_client_get_site_information'] = array(
+    'arguments' => array(),
+    'callback' => '_d2d_client_get_site_information',
+    'description' => 'Returns site title and slogon of this website.',
+  );
   return $methods;
 }
 
@@ -32,4 +37,17 @@ function _d2d_client_get_users_number($arguments, $rpc_info) {
 
   return d2d_implode(array('return' => $users_number, 'error' => $error_string));
 
+}
+
+/**
+ */
+function _d2d_client_get_site_information($arguments, $rpc_info) {
+  $error_string = NULL;
+  $return = array();
+
+  $return['name'] = variable_get('site_name', '');
+  $return['slogan'] = variable_get('site_slogan', '');
+
+  $return = d2d_implode($return);
+  return d2d_implode(array('return' => $return, 'error' => $error_string));
 }
