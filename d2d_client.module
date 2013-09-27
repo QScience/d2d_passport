@@ -24,6 +24,11 @@ function d2d_client_d2d_secure_rpc() {
     'callback' => '_d2d_client_get_nodes_number',
     'description' => 'Returns nodes number of this website.',
   );
+  $methods['d2d_client_get_tags'] = array(
+    'arguments' => array(),
+    'callback' => '_d2d_client_get_tags',
+    'description' => 'Returns tags set in d2d client configure page.',
+  );
   return $methods;
 }
 
@@ -74,6 +79,13 @@ function _d2d_client_get_nodes_number($arguments, $rpc_info) {
 
 }
 
+/**
+ */
+function _d2d_client_get_tags($arguments, $rpc_info) {
+  $error_string = NULL;
+  $return = variable_get('d2d_client_instance_tags', '');
+  return d2d_implode(array('return' => $return, 'error' => $error_string));
+}
 
 /**
  * d2d_client_configure_form
