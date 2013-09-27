@@ -73,3 +73,78 @@ function _d2d_client_get_nodes_number($arguments, $rpc_info) {
   return d2d_implode(array('return' => $nodes_number, 'error' => $error_string));
 
 }
+
+
+/**
+ * d2d_client_configure_form
+ */
+function d2d_client_configure_form($form, &$form_state) {
+  $form = array();
+  $form['tags'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Tags',
+  );
+  $form['tags']['text'] = array(
+    '#type' => 'textfield',
+    '#title' => 'tags',
+    '#description' => 'seprate with comma',
+    '#default_value' => variable_get('d2d_client_instance_tags', ""),
+    '#size' => 50, 
+  );
+  $form['tags']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('SAVE'),
+  );
+
+  return $form;
+} 
+
+function d2d_client_configure_form_submit(&$form, &$form_state) {
+  if (empty($form_state['values']['text'])) {
+    drupal_set_message("Please enter some words.", "error");
+    return;
+  }
+  variable_set('d2d_client_instance_tags', $form_state['values']['text']);
+  drupal_set_message("Tags Save Successfully. D2D Server will fetch them later.");
+}
+
+/**
+ * Implements hook_menu()
+ */
+function d2d_client_menu() {
+  $items['admin/d2d/client'] = array(
+    'title' => 'Client for D2D Server',
+    //'page callback' => 'drupal_get_form',
+    'page callback' => 'd2d_client_configure_page',
+    //'page arguments' => array('d2d_client_configure_form'),
+    'access arguments' => array('administer d2d'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 81,
+  );
+  return $items;
+}
+
+
+function d2d_client_configure_page() {
+  $hks = module_invoke('d2d_client', 'd2d_secure_rpc');
+  $header = array(
+    'method_name' => t('Method Name'),
+    'method_description' => t('method_description'),
+  );
+
+  $rows = array();
+  foreach ($hks as $key => $value) {
+    $rows[$key][] = $key;
+    $rows[$key][] = isset($value['description']) ? $value['description'] : '';
+  }
+  $check = l(t('go to check the permissions?'), 'admin/d2d/g_and_p/permissions');
+  //$rows[] = array('<div id="d2d-client-check-permission">' . $check . "</div>", NULL);
+  $rows[] = array('<strong>' . $check . "</strong>", NULL);
+
+  $page = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('patterns-server-list-table'))));
+
+  $form = drupal_get_form('d2d_client_configure_form');
+  $page .= drupal_render($form);
+
+  return $page;
+}
