@@ -125,7 +125,7 @@ function d2d_client_configure_form_submit(&$form, &$form_state) {
  */
 function d2d_client_menu() {
   $items['admin/d2d/client'] = array(
-    'title' => 'Client for D2D Server',
+    'title' => 'D2D Client',
     //'page callback' => 'drupal_get_form',
     'page callback' => 'd2d_client_configure_page',
     //'page arguments' => array('d2d_client_configure_form'),
