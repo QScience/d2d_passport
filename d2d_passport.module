@@ -6,27 +6,27 @@
 /**
  * Implements hook_d2d_secure_rpc().
  */
-function d2d_client_d2d_secure_rpc() {
+function d2d_passport_d2d_secure_rpc() {
 
   $methods = array();
-  $methods['d2d_client_get_users_number'] = array(
+  $methods['d2d_passport_get_users_number'] = array(
     'arguments' => array(),
-    'callback' => '_d2d_client_get_users_number',
+    'callback' => '_d2d_passport_get_users_number',
     'description' => 'Returns the number of users in this website.',
   );
-  $methods['d2d_client_get_site_information'] = array(
+  $methods['d2d_passport_get_site_information'] = array(
     'arguments' => array(),
-    'callback' => '_d2d_client_get_site_information',
+    'callback' => '_d2d_passport_get_site_information',
     'description' => 'Returns the title and the slogan of this website.',
   );
-  $methods['d2d_client_get_nodes_number'] = array(
+  $methods['d2d_passport_get_nodes_number'] = array(
     'arguments' => array(),
-    'callback' => '_d2d_client_get_nodes_number',
+    'callback' => '_d2d_passport_get_nodes_number',
     'description' => 'Returns the number of nodes created so far in this website.',
   );
-  $methods['d2d_client_get_tags'] = array(
+  $methods['d2d_passport_get_tags'] = array(
     'arguments' => array(),
-    'callback' => '_d2d_client_get_tags',
+    'callback' => '_d2d_passport_get_tags',
     'description' => 'Returns the D2D tags inserted in the configuration page.',
   );
   return $methods;
@@ -34,7 +34,7 @@ function d2d_client_d2d_secure_rpc() {
 
 /**
  */
-function _d2d_client_get_users_number($arguments, $rpc_info) {
+function _d2d_passport_get_users_number($arguments, $rpc_info) {
   $error_string = NULL;
   $users_number = NULL;
 
@@ -51,7 +51,7 @@ function _d2d_client_get_users_number($arguments, $rpc_info) {
 
 /**
  */
-function _d2d_client_get_site_information($arguments, $rpc_info) {
+function _d2d_passport_get_site_information($arguments, $rpc_info) {
   $error_string = NULL;
   $return = array();
 
@@ -64,7 +64,7 @@ function _d2d_client_get_site_information($arguments, $rpc_info) {
 
 /**
  */
-function _d2d_client_get_nodes_number($arguments, $rpc_info) {
+function _d2d_passport_get_nodes_number($arguments, $rpc_info) {
   $error_string = NULL;
   $nodes_number = NULL;
 
@@ -81,16 +81,16 @@ function _d2d_client_get_nodes_number($arguments, $rpc_info) {
 
 /**
  */
-function _d2d_client_get_tags($arguments, $rpc_info) {
+function _d2d_passport_get_tags($arguments, $rpc_info) {
   $error_string = NULL;
-  $return = variable_get('d2d_client_instance_tags', '');
+  $return = variable_get('d2d_passport_instance_tags', '');
   return d2d_implode(array('return' => $return, 'error' => $error_string));
 }
 
 /**
- * d2d_client_configure_form
+ * d2d_passport_configure_form
  */
-function d2d_client_configure_form($form, &$form_state) {
+function d2d_passport_configure_form($form, &$form_state) {
   $form = array();
   $form['tags'] = array(
     '#type' => 'fieldset',
@@ -101,7 +101,7 @@ function d2d_client_configure_form($form, &$form_state) {
     '#type' => 'textfield',
     // '#title' => 'tags',
     '#description' => 'Separate multiple tags with a comma.',
-    '#default_value' => variable_get('d2d_client_instance_tags', ""),
+    '#default_value' => variable_get('d2d_passport_instance_tags', ""),
     '#size' => 50,
   );
   $form['tags']['submit'] = array(
@@ -112,24 +112,24 @@ function d2d_client_configure_form($form, &$form_state) {
   return $form;
 }
 
-function d2d_client_configure_form_submit(&$form, &$form_state) {
+function d2d_passport_configure_form_submit(&$form, &$form_state) {
   if (empty($form_state['values']['text'])) {
     drupal_set_message("Please enter some words.", "error");
     return;
   }
-  variable_set('d2d_client_instance_tags', $form_state['values']['text']);
+  variable_set('d2d_passport_instance_tags', $form_state['values']['text']);
   drupal_set_message("Tags Save Successfully. D2D Server will fetch them later.");
 }
 
 /**
  * Implements hook_menu()
  */
-function d2d_client_menu() {
-  $items['admin/d2d/client'] = array(
-    'title' => 'D2D Client',
+function d2d_passport_menu() {
+  $items['admin/d2d/passport'] = array(
+    'title' => 'D2D Passport',
     //'page callback' => 'drupal_get_form',
-    'page callback' => 'd2d_client_configure_page',
-    //'page arguments' => array('d2d_client_configure_form'),
+    'page callback' => 'd2d_passport_configure_page',
+    //'page arguments' => array('d2d_passport_configure_form'),
     'access arguments' => array('administer d2d'),
     'type' => MENU_LOCAL_TASK,
     'weight' => 81,
@@ -138,8 +138,8 @@ function d2d_client_menu() {
 }
 
 
-function d2d_client_configure_page() {
-  $hks = module_invoke('d2d_client', 'd2d_secure_rpc');
+function d2d_passport_configure_page() {
+  $hks = module_invoke('d2d_passport', 'd2d_secure_rpc');
   $header = array(
     'method_name' => t('Method Name'),
     'method_description' => t('method_description'),
@@ -151,12 +151,12 @@ function d2d_client_configure_page() {
     $rows[$key][] = isset($value['description']) ? $value['description'] : '';
   }
   $check = l(t('Make sure that the permissions are correctly set.'), 'admin/d2d/g_and_p/permissions');
-  //$rows[] = array('<div id="d2d-client-check-permission">' . $check . "</div>", NULL);
+  //$rows[] = array('<div id="d2d-passport-check-permission">' . $check . "</div>", NULL);
   $rows[] = array('<strong>' . $check . "</strong>", NULL);
 
   $page = theme('table', array('header' => $header, 'rows' => $rows, 'attributes' => array('class' => array('patterns-server-list-table'))));
 
-  $form = drupal_get_form('d2d_client_configure_form');
+  $form = drupal_get_form('d2d_passport_configure_form');
   $page .= drupal_render($form);
 
   return $page;

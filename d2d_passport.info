@@ -1,4 +1,4 @@
-name = D2D Client
+name = D2D Passport 
 description = Share information such as web site names, slogan, tags and  number of users with a D2D server, in order to make your instance searchable
 package = D2D
 core = 7.x
