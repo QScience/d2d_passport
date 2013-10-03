@@ -12,22 +12,22 @@ function d2d_client_d2d_secure_rpc() {
   $methods['d2d_client_get_users_number'] = array(
     'arguments' => array(),
     'callback' => '_d2d_client_get_users_number',
-    'description' => 'Returns users_number of this website.',
+    'description' => 'Returns the number of users in this website.',
   );
   $methods['d2d_client_get_site_information'] = array(
     'arguments' => array(),
     'callback' => '_d2d_client_get_site_information',
-    'description' => 'Returns site title and slogon of this website.',
+    'description' => 'Returns the title and the slogan of this website.',
   );
   $methods['d2d_client_get_nodes_number'] = array(
     'arguments' => array(),
     'callback' => '_d2d_client_get_nodes_number',
-    'description' => 'Returns nodes number of this website.',
+    'description' => 'Returns the number of nodes created so far in this website.',
   );
   $methods['d2d_client_get_tags'] = array(
     'arguments' => array(),
     'callback' => '_d2d_client_get_tags',
-    'description' => 'Returns tags set in d2d client configure page.',
+    'description' => 'Returns the D2D tags inserted in the configuration page.',
   );
   return $methods;
 }
@@ -94,7 +94,7 @@ function d2d_client_configure_form($form, &$form_state) {
   $form = array();
   $form['tags'] = array(
     '#type' => 'fieldset',
-    '#title' => 'Tags',
+    '#title' => 'D2D Tags',
     '#description' => t('Insert here a few keywords that properly identify your site. These keywords will be used to index your instance on the D2D server'),
   );
   $form['tags']['text'] = array(
@@ -150,7 +150,7 @@ function d2d_client_configure_page() {
     $rows[$key][] = $key;
     $rows[$key][] = isset($value['description']) ? $value['description'] : '';
   }
-  $check = l(t('go to check the permissions?'), 'admin/d2d/g_and_p/permissions');
+  $check = l(t('Make sure that the permissions are correctly set.'), 'admin/d2d/g_and_p/permissions');
   //$rows[] = array('<div id="d2d-client-check-permission">' . $check . "</div>", NULL);
   $rows[] = array('<strong>' . $check . "</strong>", NULL);
 
