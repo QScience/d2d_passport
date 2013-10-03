@@ -95,21 +95,22 @@ function d2d_client_configure_form($form, &$form_state) {
   $form['tags'] = array(
     '#type' => 'fieldset',
     '#title' => 'Tags',
+    '#description' => t('Insert here a few keywords that properly identify your site. These keywords will be used to index your instance on the D2D server'),
   );
   $form['tags']['text'] = array(
     '#type' => 'textfield',
-    '#title' => 'tags',
-    '#description' => 'seprate with comma',
+    // '#title' => 'tags',
+    '#description' => 'Separate multiple tags with a comma.',
     '#default_value' => variable_get('d2d_client_instance_tags', ""),
-    '#size' => 50, 
+    '#size' => 50,
   );
   $form['tags']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('SAVE'),
+    '#value' => t('Save'),
   );
 
   return $form;
-} 
+}
 
 function d2d_client_configure_form_submit(&$form, &$form_state) {
   if (empty($form_state['values']['text'])) {
