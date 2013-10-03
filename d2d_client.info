@@ -1,6 +1,6 @@
 name = D2D Client
-description = "With this Client, D2D Server can get all the information it want."
-package = U_D
+description = Share information such as web site names, slogan, tags and  number of users with a D2D server, in order to make your instance searchable
+package = D2D
 core = 7.x
 php = 5.3
 
