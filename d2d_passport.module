@@ -158,6 +158,7 @@ function d2d_passport_define_server_form($form, &$form_state) {
 
   $header = array(
     'd2did' => t('D2D ID'),
+    'url' => t('URL'),
     'title' => t('TITLE'),
     'description' => t('DESCRIPTION'),
     'time_inserted' => t('FRIENDSHIP CREATED'),
@@ -168,6 +169,7 @@ function d2d_passport_define_server_form($form, &$form_state) {
     $createdtime = date('j-m-Y H:i:s (P)', $friend['time_inserted']);
     $options[$key]= array(
       'd2did' => $key,
+      'url' => $friend['url'],
       'title' => $friend['name'],
       'description' => $friend['description'],
       'time_inserted' => $createdtime,
@@ -267,5 +269,4 @@ function d2d_passport_notify($my_instance, $instance, $type, $len) {
   dsm($instance);
   dsm($type);
   dsm($len);
-
 }
