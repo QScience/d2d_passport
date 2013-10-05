@@ -289,9 +289,15 @@ function d2d_passport_notify($my_instance, $instance, $type, $len) {
   $error_string = '';  
   
   $res = d2d_call_secure_rpc($friend, 'd2d_server_save_client_actions', array('info' => $imploded_infor), $error_string);
-  
+
   if ($res === FALSE) {
     watchdog('d2d_passport', check_plain($url) . ' - ' . check_plain($error_string));
+  }
+  else {
+    $result = d2d_explode($res);
+    if (isset($result['return']) && $result['return'] === FALSE) {
+      watchdog('d2d_passport', check_plain($url) . ' - ' . $result['error']);
+    }
   }
 
 }
