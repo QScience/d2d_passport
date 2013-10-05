@@ -3,6 +3,8 @@
  * @file
  */
 
+variable_set('D2D_PASSPORT_NOTIFY', TRUE);
+
 /**
  * Implements hook_d2d_secure_rpc().
  */
@@ -160,4 +162,12 @@ function d2d_passport_configure_page() {
   $page .= drupal_render($form);
 
   return $page;
+}
+
+function d2d_passport_notify($my_instance, $instance, $type, $len) {
+  dsm($my_instance);
+  dsm($instance);
+  dsm($type);
+  dsm($len);
+
 }
