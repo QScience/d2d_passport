@@ -185,7 +185,7 @@ function d2d_passport_define_server_form($form, &$form_state) {
 
   $form['define_d2d_server']['submit'] = array(
     '#type' => 'submit',
-    '#value' => t('Select D2D Server'),
+    '#value' => t('Select The D2D Server'),
   );
 
   return $form;
@@ -271,6 +271,10 @@ function d2d_passport_notify($my_instance, $instance, $type, $len) {
 //  dsm($len);
 
   $url = variable_get('D2D_PASSPORT_SERVER_URL', FALSE);
+  if (empty($url)) {
+      watchdog('d2d_passport', "The d2d server hasn't been set");
+      return;
+  } 
   $friend = d2d_api_friend_get_by_url($url);
   
   $information = array();
