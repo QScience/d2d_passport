@@ -97,7 +97,7 @@ function d2d_passport_configure_form($form, &$form_state) {
   $form['tags'] = array(
     '#type' => 'fieldset',
     '#title' => 'D2D Tags',
-    '#description' => t('Insert here a few keywords that properly identify your site. These keywords will be used to index your instance on the D2D server'),
+    '#description' => t('Insert here a few keywords that properly identify your site. These keywords will be used by the D2D server to index your instance.'),
   );
   $form['tags']['text'] = array(
     '#type' => 'textfield',
