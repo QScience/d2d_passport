@@ -144,7 +144,7 @@ function d2d_passport_define_server_form($form, &$form_state) {
       '#suffix' => '.',
     );
     return $form;
-  } 
+  }
 
   if ($friends === FALSE) {
     $form['define_d2d_server']['noavaild2d'] = array(
@@ -192,7 +192,7 @@ function d2d_passport_define_server_form($form, &$form_state) {
 }
 
 function d2d_passport_define_server_form_submit(&$form, &$form_state) {
-  
+
   //dsm($form_state);
   if (empty($form_state['values']['tablesl'])) {
     drupal_set_message("Please choose at least one.", 'error');
@@ -229,9 +229,9 @@ function d2d_passport_menu() {
 }
 
 function d2d_passport_reset_d2d_server() {
-  variable_del('D2D_PASSPORT_SERVER_URL'); 
-  variable_del('D2D_PASSPORT_SERVER_D2DID'); 
-  variable_del('D2D_PASSPORT_SERVER_ID'); 
+  variable_del('D2D_PASSPORT_SERVER_URL');
+  variable_del('D2D_PASSPORT_SERVER_D2DID');
+  variable_del('D2D_PASSPORT_SERVER_ID');
   drupal_goto('admin/d2d/passport');
 }
 
@@ -274,25 +274,29 @@ function d2d_passport_notify($my_instance, $instance, $type, $len) {
   if (empty($url)) {
       watchdog('d2d_passport', "The d2d server hasn't been set");
       return;
-  } 
+  }
   $friend = d2d_api_friend_get_by_url($url);
-  
+
   $information = array();
   $information['from'] = $my_instance['d2d_id'];
   $information['to'] = $instance['d2d_id'];
   $information['type'] = $type;
   $information['len'] = $len;
 
+  watchdog('d2d_passport_notify', 'go! -1');
+
   $imploded_infor = d2d_implode($information);
-  
+
   if ($imploded_infor === FALSE) {
-    drupal_set_message(t('Internal error while compacting the patterns to be sent.'), 'error'); 
+    drupal_set_message(t('Internal error while compacting the patterns to be sent.'), 'error');
     return FALSE;
   }
-  
-  $error_string = '';  
-  
-  $res = d2d_call_secure_rpc($friend, 'd2d_server_save_client_actions', array('info' => $imploded_infor), $error_string);
+
+  $error_string = '';
+  // Last parameter is FALSE, otherwise it creates an infinite loop
+  $res = d2d_call_secure_rpc($friend, 'd2d_server_save_client_actions', array(
+    'info' => $imploded_infor,
+  ), $error_string, FALSE);
 
   if ($res === FALSE) {
     watchdog('d2d_passport', check_plain($url) . ' - ' . check_plain($error_string));
