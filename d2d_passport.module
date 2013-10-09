@@ -140,8 +140,8 @@ function d2d_passport_define_server_form($form, &$form_state) {
   if ($server !== FALSE) {
     $form['define_d2d_server']['selectedserver'] = array(
       '#prefix' => "<strong>Selected Server:  " . l($serverd2did, "admin/d2d/instances/$serverid/details") . "<br></strong>",
-      '#markup' => t("If you want to reset, ") . l(t('Click here'), 'admin/d2d/passport/resetserver'),
-      '#suffix' => '.',
+      '#markup' => t('Click ') . l(t('here'), 'admin/d2d/passport/resetserver'),
+      '#suffix' => t(' to reste it.'),
     );
     return $form;
   } 
