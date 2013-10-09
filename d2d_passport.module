@@ -118,6 +118,7 @@ function d2d_passport_configure_form($form, &$form_state) {
     '#type' => 'checkbox',
     '#title' => 'Allow Record Action Informations',
     '#default_value' => variable_get('D2D_PASSPORT_NOTIFY', 0),
+    //'#description' => t('if checked, the information about actions you operating on any other d2d instances will be recorded by d2d server. but of course, we do not collect any private informations.'),
   );
   $form['notify']['submit'] = array(
     '#type' => 'submit',
