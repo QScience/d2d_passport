@@ -141,7 +141,7 @@ function d2d_passport_define_server_form($form, &$form_state) {
     $form['define_d2d_server']['selectedserver'] = array(
       '#prefix' => "<strong>Selected Server:  " . l($serverd2did, "admin/d2d/instances/$serverid/details") . "<br></strong>",
       '#markup' => t('Click ') . l(t('here'), 'admin/d2d/passport/resetserver'),
-      '#suffix' => t(' to reste it.'),
+      '#suffix' => t(' to reset it.'),
     );
     return $form;
   } 
@@ -286,7 +286,7 @@ function d2d_passport_notify($my_instance, $instance, $type, $len) {
   $imploded_infor = d2d_implode($information);
   
   if ($imploded_infor === FALSE) {
-    drupal_set_message(t('Internal error while compacting the patterns to be sent.'), 'error'); 
+    watchdog('d2d_passport', t('Internal error while compacting the patterns to be sent.'));
     return FALSE;
   }
   
