@@ -1,13 +1,16 @@
 <?php
+/**
+ * @file
+ */
 
 /**
  * Implements hook_uninstall().
  *
  */
 function d2d_passport_uninstall() {
-  variable_del('D2D_PASSPORT_SERVER_URL'); 
-  variable_del('D2D_PASSPORT_SERVER_D2DID'); 
-  variable_del('D2D_PASSPORT_SERVER_ID'); 
+  variable_del('D2D_PASSPORT_SERVER_URL');
+  variable_del('D2D_PASSPORT_SERVER_D2DID');
+  variable_del('D2D_PASSPORT_SERVER_ID');
   variable_del('D2D_PASSPORT_NOTIFY');
   variable_del('d2d_passport_instance_tags');
 }
