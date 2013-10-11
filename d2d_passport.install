@@ -8,6 +8,9 @@
  */
 function d2d_passport_install() {
   variable_set('D2D_PASSPORT_NOTIFY', TRUE);
+  // This variable is used to reset the value of D2D_PASSPORT_NOTIFY to TRUE,
+  // after a server is temporarily disabled.
+  variable_set('D2D_PASSPORT_SHOULD_NOTIFY', TRUE);
 }
 
 /**
