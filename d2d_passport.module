@@ -130,7 +130,7 @@ function d2d_passport_configure_form($form, &$form_state) {
 
 /**
  */
-function d2d_passport_configure_form_tags_submit(&$form, &$form_state) {
+function d2d_passport_configure_form_tags_submit($form, &$form_state) {
   if (empty($form_state['values']['text'])) {
     drupal_set_message(t("Please enter some words."), "error");
     return;
@@ -141,14 +141,15 @@ function d2d_passport_configure_form_tags_submit(&$form, &$form_state) {
 
 /**
  */
-function d2d_passport_configure_form_notify_submit(&$form, &$form_state) {
-  if ($form_state['values']['checkb'] === 1 &&
-      !empty(variable_get('D2D_PASSPORT_SERVER_URL', FALSE))) {
+function d2d_passport_configure_form_notify_submit($form, &$form_state) {
+  // Cannot use variable_get inside empty, otherwise an error is raised.
+  $server_url = variable_get('D2D_PASSPORT_SERVER_URL', FALSE);
+  if ($form_state['values']['checkb'] === 1 && !empty($server_url)) {
     variable_set('D2D_PASSPORT_NOTIFY', TRUE);
     drupal_set_message(t("Save D2D Notify Option Successfully."));
   }
   elseif ($form_state['values']['checkb'] === 1) {
-    drupal_set_message(t("The D2D Server hasn't been selected."), "warning");
+    drupal_set_message(t("The D2D Server has not been selected."), "warning");
     variable_set('D2D_PASSPORT_NOTIFY', FALSE);
   }
   else {
@@ -308,8 +309,8 @@ function d2d_passport_notify($my_instance, $instance, $type, $len) {
   }
   $url = variable_get('D2D_PASSPORT_SERVER_URL', FALSE);
   if (empty($url)) {
-      watchdog('d2d_passport', "The d2d server hasn't been set");
-      return;
+    watchdog('d2d_passport', "The d2d server hasn't been set");
+    return;
   }
   $friend = d2d_api_friend_get_by_url($url);
 
