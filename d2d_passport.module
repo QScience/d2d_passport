@@ -300,7 +300,6 @@ function d2d_passport_notify($my_instance, $instance, $type, $len) {
   if ($allow === FALSE) {
     return;
   }
-
   $url = variable_get('D2D_PASSPORT_SERVER_URL', FALSE);
   if (empty($url)) {
       watchdog('d2d_passport', "The d2d server hasn't been set");
@@ -324,7 +323,7 @@ function d2d_passport_notify($my_instance, $instance, $type, $len) {
   }
 
   $error_string = '';
-  // Last parameter is FALSE, otherwise it creates an infinite loop
+  // Last parameter is FALSE, otherwise it creates an infinite loop.
   $res = d2d_call_secure_rpc($friend, 'd2d_server_save_client_actions', array(
     'info' => $imploded_infor,
   ), $error_string, FALSE);
