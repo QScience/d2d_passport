@@ -4,6 +4,13 @@
  */
 
 /**
+ * Implements hook_install().
+ */
+function d2d_passport_install() {
+  variable_set('D2D_PASSPORT_NOTIFY', FALSE);
+}
+
+/**
  * Implements hook_uninstall().
  *
  */
