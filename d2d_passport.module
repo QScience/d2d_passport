@@ -32,7 +32,7 @@ function d2d_passport_d2d_secure_rpc() {
   $methods['d2d_passport_get_informations'] = array(
     'arguments' => array('infotypes' => 'is_string'),
     'callback' => '_d2d_passport_get_informations',
-    'description' => 'Returns the D2D informations according at quest',
+    'description' => 'Returns detailed information about this instance (d2d_passport).',
   );
   return $methods;
 }
