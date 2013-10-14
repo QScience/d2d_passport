@@ -57,10 +57,10 @@ function _d2d_passport_get_informations($arguments, $rpc_info) {
     $return['users_number'] = $query->rowCount();
   }
 
-  if (isset($infotypes['sites']) && $infotypes['sites'] === TRUE) {
+  if (isset($infotypes['site_info']) && $infotypes['site_info'] === TRUE) {
     $name = variable_get('site_name', '');
     $slogan = variable_get('site_slogan', '');
-    $return['sites']  = d2d_implode(array('name' => $name, 'slogan' => $slogan));
+    $return['site_info']  = d2d_implode(array('name' => $name, 'slogan' => $slogan));
   }
 
   if (isset($infotypes['nodes_number']) && $infotypes['nodes_number'] === TRUE) {
