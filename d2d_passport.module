@@ -9,26 +9,26 @@
 function d2d_passport_d2d_secure_rpc() {
 
   $methods = array();
-  $methods['d2d_passport_get_users_number'] = array(
-    'arguments' => array(),
-    'callback' => '_d2d_passport_get_users_number',
-    'description' => 'Returns the number of users in this website.',
-  );
-  $methods['d2d_passport_get_site_information'] = array(
-    'arguments' => array(),
-    'callback' => '_d2d_passport_get_site_information',
-    'description' => 'Returns the title and the slogan of this website.',
-  );
-  $methods['d2d_passport_get_nodes_number'] = array(
-    'arguments' => array(),
-    'callback' => '_d2d_passport_get_nodes_number',
-    'description' => 'Returns the number of nodes created so far in this website.',
-  );
-  $methods['d2d_passport_get_tags'] = array(
-    'arguments' => array(),
-    'callback' => '_d2d_passport_get_tags',
-    'description' => 'Returns the D2D tags inserted in the configuration page.',
-  );
+  //$methods['d2d_passport_get_users_number'] = array(
+  //  'arguments' => array(),
+  //  'callback' => '_d2d_passport_get_users_number',
+  //  'description' => 'Returns the number of users in this website.',
+  //);
+  //$methods['d2d_passport_get_site_information'] = array(
+  //  'arguments' => array(),
+  //  'callback' => '_d2d_passport_get_site_information',
+  //  'description' => 'Returns the title and the slogan of this website.',
+  //);
+  //$methods['d2d_passport_get_nodes_number'] = array(
+  //  'arguments' => array(),
+  //  'callback' => '_d2d_passport_get_nodes_number',
+  //  'description' => 'Returns the number of nodes created so far in this website.',
+  //);
+  //$methods['d2d_passport_get_tags'] = array(
+  //  'arguments' => array(),
+  //  'callback' => '_d2d_passport_get_tags',
+  //  'description' => 'Returns the D2D tags inserted in the configuration page.',
+  //);
   $methods['d2d_passport_get_informations'] = array(
     'arguments' => array('infotypes' => 'is_string'),
     'callback' => '_d2d_passport_get_informations',
