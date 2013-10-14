@@ -76,9 +76,9 @@ function _d2d_passport_get_informations($arguments, $rpc_info) {
     $return['tags'] = variable_get('d2d_passport_instance_tags', '');
   }
 
-  if (isset($infotypes['friendship']) && $infotypes['friendship']) {
+  $fs = array();
+  if (isset($infotypes['friendship']) && $infotypes['friendship'] === TRUE) {
     $friends = d2d_api_friend_get();
-    $fs = array();
     foreach ($friends as $key => $value) {
       $fs[] = d2d_implode(array(
         'd2did' => $value['d2d_id'],
@@ -87,6 +87,7 @@ function _d2d_passport_get_informations($arguments, $rpc_info) {
     }
     $return['friendship'] = $d2d_implode($fs);
   }
+    $return['friendship'] = "xxxx";
 
   return d2d_implode(array('return' => d2d_implode($return), 'error' => $error_string));
 }
