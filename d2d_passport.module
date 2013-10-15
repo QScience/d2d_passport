@@ -387,8 +387,10 @@ function d2d_passport_notify($my_instance, $instance, $type, $len) {
 
   $information = array();
   $information['from'] = $my_instance['d2d_id'];
+  $information['from_name'] = $my_instance['name'];
   $information['from_url'] = $my_instance['url'];
   $information['to'] = $instance['d2d_id'];
+  $information['to_name'] = $instance['name'];
   $information['to_url'] = $instance['url'];
   $information['type'] = $type;
   $information['len'] = $len;
