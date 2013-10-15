@@ -88,6 +88,11 @@ function _d2d_passport_get_informations($arguments, $rpc_info) {
     $return['friendship'] = d2d_implode($fs);
   }
 
+  if (isset($infotypes['d2d_description']) && $infotypes['d2d_description'] === TRUE) {
+    $di = d2d_api_own_instance_get();
+    $return['d2d_description'] = $di['description'];
+  }
+
   return d2d_implode(array('return' => d2d_implode($return), 'error' => $error_string));
 }
 
