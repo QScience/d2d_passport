@@ -4,5 +4,5 @@ Share information such as web site names, slogan, tags and number of users with 
 
 ## Dependencies
 
-- [D2D](http://github.com/QScience/d2d)
+- D2D module: http://github.com/QScience/d2d
 
