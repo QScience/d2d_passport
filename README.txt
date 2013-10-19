@@ -6,3 +6,7 @@ Share information such as web site names, slogan, tags and number of users with 
 
 - D2D module: http://github.com/QScience/d2d
 
+## Official D2D Server
+
+Check out http://drupal2drupal.org !
+
