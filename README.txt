@@ -1,0 +1,8 @@
+# D2D Passport
+
+Share information such as web site names, slogan, tags and number of users with a D2D server, in order to make your instance searchable.
+
+## Dependencies
+
+- [D2D](http://github.com/QScience/d2d)
+

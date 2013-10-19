@@ -11,6 +11,10 @@ function d2d_passport_install() {
   // This variable is used to reset the value of D2D_PASSPORT_NOTIFY to TRUE,
   // after a server is temporarily disabled.
   variable_set('D2D_PASSPORT_SHOULD_NOTIFY', TRUE);
+
+  variable_set('D2D_PASSPORT_SERVER_URL', FALSE);
+  variable_set('D2D_PASSPORT_SERVER_ID', FALSE);
+  variable_set('D2D_PASSPORT_SERVER_D2DID', FALSE);
 }
 
 /**
@@ -22,5 +26,6 @@ function d2d_passport_uninstall() {
   variable_del('D2D_PASSPORT_SERVER_D2DID');
   variable_del('D2D_PASSPORT_SERVER_ID');
   variable_del('D2D_PASSPORT_NOTIFY');
+  variable_del('D2D_PASSPORT_SHOULD_NOTIFY');
   variable_del('d2d_passport_instance_tags');
 }
